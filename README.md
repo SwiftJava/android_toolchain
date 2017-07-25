@@ -12,7 +12,11 @@ There are a couple of Android specific APIs in this release which need to be use
 
 A hybrid app is a conventional Android Java app that loads a `swifthello.so` dynamic library on initialisation. The developer specifies a pair of Java interfaces to communicate to and from Swift and a code generator generates Swift to realise the JNI calls to implements these protocols. The interface for messaging from Java to Swift must have a name that ends in "Listener" and the interface in the opposite direction is the "Responder".
 
-There is one final JNI hook that needs to be code by hand to bind the Listener and Responder to each end of the pipe. This is [the code here](https://github.com/SwiftJava/swift-android-samples/blob/master/swifthello/src/main/swift/Sources/main.swift#L10).
+There is one final JNI hook that needs to be code by hand to bind the Listener and Responder to each end of the pipe. This is the code [here](https://github.com/SwiftJava/swift-android-samples/blob/master/swifthello/src/main/java/net/zhuoweizhang/swifthello/SwiftHello.java#L85) and [here](https://github.com/SwiftJava/swift-android-samples/blob/master/swifthello/src/main/swift/Sources/main.swift#L10).
+
+## Docker Containers
+
+If you prefer a Docker solution on your Mac rather than a VM, there is an alternative toolchain available with instructions [here](https://github.com/gonzalolarralde/swifty-robot-environment).
 
 ## Status
 
