@@ -2,9 +2,13 @@
 
 ![](http://johnholdsworth.com/swifthello.jpg)
 
-This is the issue tracking repo for the Ubuntu 16.04 binaries for including Swift into an Android application which can be downloaded [here](http://johnholdsworth.com/android_toolchain.tgz). This link contains a README which will direct you to the current version hosted on Goole Drive. It's intended to be used in hybrid Java/Swift applications, an example of which is [swift-android-samples](https://github.com/SwiftJava/swift-android-samples).
+This is the issue tracking repo for the Android toolchain for including Swift into an Android application built on macOS or Ubuntu Linux.
 
-After you have downloaded the toolchain, setup your environment using the script `setup_ubuntu_client.sh` in the release which downloads the Android NDK and sets up links from `/usr/android/ndk` required for system headers.
+It can be downloaded [here](http://johnholdsworth.com/android_toolchain.tgz).
+
+This link contains a README which will direct you to the current version hosted on Goole Drive. It's intended to be used in hybrid Java/Swift applications, an example of which is [swift-android-samples](https://github.com/SwiftJava/swift-android-samples).
+
+After you have downloaded the toolchain, on Linux setup your environment using the script `setup_ubuntu_client.sh` in the release. This downloads the Android NDK and sets up links from `/usr/android/ndk` required for system headers. On macOS you need only make sure swift-install/usr/bin is in your path and `/usr/local/android/ndk` links to a valid Android NDK.
 
 It should just then be a case of cloning the [swift-android-gradle](https://github.com/SwiftJava/swift-android-gradle) and typing `./gradlew install` then cloning swift-android-samples and typing `cd swifthello; ./gradlew installDebug`. This uses the Swift package manager to build the a shared library and copies in those for swift itself. Make sure the `.../swift-install/usr/bin` directory is in your path.
 
@@ -24,11 +28,13 @@ This toolchain could be considered to be at a fairly well advanced Beta stage wi
 
 ## Building the toolchain
 
-I'd not recommend trying this as it is by no means an automated process at present. libdispatch needs have the TRASHIT macro defined in `src/internal.h` and it's linking modified to link against `-lswiftCore` and `-latomic` with the appropriate paths. At the time of writing, there are also a few currently open PRs you'll need to merge in [1113](https://github.com/apple/swift-corelibs-foundation/pull/1113), [10836](https://github.com/apple/swift/pull/10836) and [55](https://github.com/apple/swift-llvm/pull/55).
+I'd not recommend trying this at present as it is by no means an automated process. libdispatch needs have the TRASHIT macro defined in `src/internal.h` and it's linking modified to link against `-lswiftCore` and `-latomic` with the appropriate paths. At the time of writing, there are also a few currently open PRs you'll need to merge in [1113](https://github.com/apple/swift-corelibs-foundation/pull/1113), [10836](https://github.com/apple/swift/pull/10836) and [55](https://github.com/apple/swift-llvm/pull/55). Preparing a macOS toolchain currently involves grafting binaries for `swift` and `swift-build` from a macOS toolchain into this distribution.
 
 ## Licenses
 
 This binary package contains software built from the following repositories:
+
+[https://www.openssl.org](https://www.openssl.org/source/openssl-1.0.2-latest.tar.gz)
 
 [https://github.com/curl/curl](https://github.com/curl/curl)
 
