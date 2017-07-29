@@ -2,25 +2,25 @@
 
 ![](http://johnholdsworth.com/swifthello.jpg)
 
-This is the issue tracking repo for the Android toolchain for including Swift into an Android application built on macOS or Ubuntu Linux.
+This is the issue tracking repo for the Android toolchain for including Swift into an Android application built on macOS X or Ubuntu Linux 16.04.
 
 It can be downloaded [here](http://johnholdsworth.com/android_toolchain.tgz).
 
-This link contains a README which will direct you to the current version hosted on Goole Drive. It's intended to be used in hybrid Java/Swift applications, an example of which is [swift-android-samples](https://github.com/SwiftJava/swift-android-samples).
+This link contains a README which will direct you to the current version hosted on Goole Drive. It's intended to be used in hybrid Java/Swift applications, an example of which is [swift-android-samples](https://github.com/SwiftJava/swift-android-samples) or [swift-android-kotlin](https://github.com/SwiftJava/swift-android-kotlin) .
 
-After you have downloaded the toolchain, on Linux setup your environment using the script `setup_ubuntu_client.sh` in the release. This downloads the Android NDK and sets up links from `/usr/local/android/ndk` required for system headers. On macOS you need only make sure swift-install/usr/bin is in your path, `/usr/local/android/ndk` links to a valid Android NDK and you'll need the `rpl` command available on from `brew install rpl`.
+After you have downloaded the toolchain, all that should be required is to run the script `swift-install/setup.sh` to install the gradle plugin.
 
-It should just then be a case of cloning the [swift-android-gradle](https://github.com/SwiftJava/swift-android-gradle) and typing `./gradlew install` then cloning [swift-android-samples](https://github.com/SwiftJava/swift-android-samples) and `cd swifthello; ./gradlew installDebug`. This uses the Swift package manager to build the a shared library and copies in those for swift itself. Make sure the `.../swift-install/usr/bin` directory is in your path.
+Clone the example project [swift-android-samples](https://github.com/SwiftJava/swift-android-samples) and `cd swifthello; ./gradlew installDebug` with an Android Lolipop (api-21 or more recent) device to get started. This uses the Swift package manager to build the a shared library and copies in those for swift itself.
 
 The default build will require the following Android SDK resources:
 
-	sdkmanager "ndk-bundle" "platforms;android-25" "build-tools;25.0.3" "platform-tools" 
+	sdkmanager "platforms;android-25" "build-tools;25.0.3" "platform-tools" 
 
 There are a couple of Android specific APIs in this release which need to be used to setup thread cleanup, the TMPDIR environment variable and a Certificate Authority "pem" file in order to be able to use SSL/https:. These are setup in the example project [here](https://github.com/SwiftJava/swift-android-samples/blob/master/swifthello/src/main/java/net/zhuoweizhang/swifthello/SwiftHello.java#L35) and [here](https://github.com/SwiftJava/swift-android-samples/blob/master/swifthello/src/main/swift/Sources/main.swift#L20).
 
-A hybrid app is a conventional Android Java app that loads a `swifthello.so` dynamic library on initialisation. The developer specifies a pair of Java interfaces to communicate to and from Swift and a code generator generates Swift to realise the JNI calls to implement these protocols. The interface for messaging from Java to Swift must have a name that ends in "Listener" and the interface in the opposite direction is the "Responder".
+A hybrid app is a conventional Android Java app that loads a `swifthello.so` dynamic library on initialisation. The developer specifies a pair of Java interfaces to communicate to and from Swift and a code generator [genswift.sh](https://github.com/SwiftJava/SwiftJava/blob/master/genswift.sh) generates Swift sources to realise the JNI calls to implement these protocols. The interface for messaging from Java to Swift must have a name that ends in "Listener" and the interface in the opposite direction is normally the "Responder".
 
-There is one final JNI hook that needs to be code by hand to bind the Listener and Responder to each end of the pipe. This is the code [here](https://github.com/SwiftJava/swift-android-samples/blob/master/swifthello/src/main/java/net/zhuoweizhang/swifthello/SwiftHello.java#L85) and [here](https://github.com/SwiftJava/swift-android-samples/blob/master/swifthello/src/main/swift/Sources/main.swift#L10).
+There is one final JNI hook that needs to be coded by hand to bind the Listener and Responder to each end of the pipe. This is the code [here](https://github.com/SwiftJava/swift-android-samples/blob/master/swifthello/src/main/java/net/zhuoweizhang/swifthello/SwiftHello.java#L85) and [here](https://github.com/SwiftJava/swift-android-samples/blob/master/swifthello/src/main/swift/Sources/main.swift#L10).
 
 ## Status
 
@@ -51,6 +51,9 @@ git://git.gnome.org/libxml2 or
 
 Built using a fork of the very handy scripts in:
 [https://github.com/gonzalolarralde/swifty-robot-environment](https://github.com/gonzalolarralde/swifty-robot-environment)
+
+This kit contains some headers and libraries from the Android NDK
+[https://developer.android.com/studio/index.html](https://developer.android.com/studio/index.html)
 
 Your use of this software is subject to the license agreements of these projects and,
 
