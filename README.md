@@ -1,6 +1,6 @@
 # Swift toolchain for Android
 
-![](http://johnholdsworth.com/swifthello.jpg)
+![](http://johnholdsworth.com/swiftjava.png)
 
 This is the issue tracking repo for the Android toolchain for including Swift into an Android application built on macOS X or Ubuntu Linux 16.04.
 
