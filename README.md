@@ -6,17 +6,13 @@ This is the issue tracking repo for the Android toolchain for including Swift in
 
 It can be downloaded [here](http://johnholdsworth.com/android_toolchain.tgz).
 
-This link contains a README which will direct you to the current version hosted on Goole Drive. It's intended to be used in hybrid Java/Swift applications, an example of which is [swift-android-samples](https://github.com/SwiftJava/swift-android-samples) or [swift-android-kotlin](https://github.com/SwiftJava/swift-android-kotlin) .
+It's intended to be used in hybrid Java/Swift applications, an example of which is [swift-android-samples](https://github.com/SwiftJava/swift-android-samples) or [swift-android-kotlin](https://github.com/SwiftJava/swift-android-kotlin) .
 
 After you have downloaded the toolchain, all that should be required is to run the script `swift-install/setup.sh` to install the gradle plugin.
 
 Clone the example project [swift-android-samples](https://github.com/SwiftJava/swift-android-samples) and `cd swifthello; ./gradlew installDebug` with an Android Lolipop (api-21 or more recent) device to get started. This uses the Swift package manager to build the a shared library and copies in those for swift itself.
 
-The default build will require the following Android SDK resources:
-
-	sdkmanager "platforms;android-25" "build-tools;25.0.3" "platform-tools" 
-
-There are a couple of Android specific APIs in this release which need to be used to setup thread cleanup, the TMPDIR environment variable and a Certificate Authority "pem" file in order to be able to use SSL/https:. These are setup in the example project [here](https://github.com/SwiftJava/swift-android-samples/blob/master/swifthello/src/main/java/net/zhuoweizhang/swifthello/SwiftHello.java#L35) and [here](https://github.com/SwiftJava/swift-android-samples/blob/master/swifthello/src/main/swift/Sources/main.swift#L20).
+There are a couple of Android specific APIs in this release which need to be used to setup thread cleanup, the TMPDIR environment variable and a Certificate Authority "pem" file in order to be able to use SSL/https:. These are setup in the example project [here](https://github.com/SwiftJava/swift-android-samples/blob/master/swifthello/src/main/java/net/zhuoweizhang/swifthello/SwiftHello.java#L44) and [here](https://github.com/SwiftJava/swift-android-samples/blob/master/swifthello/src/main/swift/Sources/main.swift#L20).
 
 A hybrid app is a conventional Android Java app that loads a `swifthello.so` dynamic library on initialisation. The developer specifies a pair of Java interfaces to communicate to and from Swift and a code generator [genswift.sh](https://github.com/SwiftJava/SwiftJava/blob/master/genswift.sh) generates Swift sources to realise the JNI calls to implement these protocols. The interface for messaging from Java to Swift must have a name that ends in "Listener" and the interface in the opposite direction is normally the "Responder".
 
