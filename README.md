@@ -4,7 +4,7 @@
 
 This is the issue tracking repo for the Android toolchain for including Swift into an Android application built on macOS X or Ubuntu Linux 16.04.
 
-It can be downloaded [here](http://johnholdsworth.com/android_toolchain.tgz).
+It can be downloaded [here](android_toolchain_4.1.0.tgz).
 
 It's intended to be used in hybrid Java/Swift applications, an example of which is [swift-android-samples](https://github.com/SwiftJava/swift-android-samples) or [swift-android-kotlin](https://github.com/SwiftJava/swift-android-kotlin) .
 
